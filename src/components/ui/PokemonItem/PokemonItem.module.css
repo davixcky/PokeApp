@@ -1,0 +1,13 @@
+.pokemonItem { 
+    background-color: #E3E4EE;
+    text-align: center;
+    border-radius: 20px;
+    margin-bottom: 50px;
+}
+
+.pokemonItem:hover { 
+    background-color: green;
+}
+
+.pokemonTitle {
+}
