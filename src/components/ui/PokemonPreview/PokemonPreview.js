@@ -5,11 +5,15 @@ import {Card} from "../Card";
 import {usePokemonContext} from "../../../context/pokemonContext";
 
 const PokemonPreview = () => {
-    const {currentPokemon} = usePokemonContext();
+    const {currentPokemon, capturedPokemon, onCaptureCurrentPokemon} = usePokemonContext();
 
     useEffect(() => {
         console.log(currentPokemon);
     }, [currentPokemon]);
+
+    useEffect(() => {
+        console.log(capturedPokemon);
+    }, [capturedPokemon]);
 
     if (!currentPokemon) {
         return (
@@ -23,10 +27,6 @@ const PokemonPreview = () => {
         return currentPokemon.sprites.other.dream_world.front_default || 'https://cdn.vectorstock.com/i/1000x1000/74/05/pokemon-go-logo-icon-vector-23237405.jpg';
     };
 
-    const onCatch = () => {
-        console.log('catch pokemon');
-    };
-
     const onShowDetails = () => {
         console.log('show pokemon details');
     };
@@ -35,7 +35,7 @@ const PokemonPreview = () => {
         <Card>
             <h2>{currentPokemon.forms[0].name || 'name not found'}</h2>
             <img src={getImageUrl()} alt={currentPokemon.forms[0].name || 'name not found'}/>
-            <button onClick={onCatch}>catch</button>
+            <button onClick={onCaptureCurrentPokemon}>catch</button>
             <button onClick={onShowDetails}>details</button>
         </Card>
     );

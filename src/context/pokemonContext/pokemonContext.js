@@ -4,16 +4,17 @@ import PropTypes from 'prop-types';
 
 const PokemonContext = createContext();
 
-const PokemonProvider = ({ children }) => {
+const PokemonProvider = ({children}) => {
     const [tempPokemonList, setTempPokemonList] = useState([]);
     const [pokemonList, setPokemonList] = useState([]);
     const [currentUrl, setCurrentUrl] = useState('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=150');
     const [currentPokemon, setCurrentPokemon] = useState(undefined);
+    const [capturedPokemon, setCapturedPokemon] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             // TODO: If data is in localstorage, load from there
-            const { results, next } = await pokemonApi.doGet('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=150');
+            const {results, next} = await pokemonApi.doGet('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=150');
             setPokemonList(results);
             setTempPokemonList(results);
             setCurrentUrl(next);
@@ -26,8 +27,8 @@ const PokemonProvider = ({ children }) => {
         setPokemonList(tempPokemonList);
 
         const filterList = (list) => {
-            return list.filter(({ name }) => {
-               return name.includes(keyword);
+            return list.filter(({name}) => {
+                return name.includes(keyword);
             });
         }
 
@@ -39,12 +40,22 @@ const PokemonProvider = ({ children }) => {
         setCurrentPokemon(data);
     };
 
+    const onCaptureCurrentPokemon = () => {
+        setCapturedPokemon(prev => {
+            if (prev.includes(currentPokemon)) return prev;
+
+            return [...prev, currentPokemon];
+        });
+    };
+
     return (
         <PokemonContext.Provider value={{
             pokemonList,
             currentPokemon,
+            capturedPokemon,
             searchInPokemonList,
             setCurrentPokemonID,
+            onCaptureCurrentPokemon,
         }}>
             {children}
         </PokemonContext.Provider>
@@ -64,4 +75,4 @@ const usePokemonContext = () => {
     return context;
 }
 
-export { PokemonProvider, usePokemonContext };
+export {PokemonProvider, usePokemonContext};
