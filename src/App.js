@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from "react";
+import styles from "./App.module.css";
+import {PokemonSection} from "./components/ui";
+import {usePokemonContext, PokemonProvider} from "./context/pokemonContext";
+import {PokemonPreview} from "./components/ui/PokemonPreview";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <PokemonProvider>
+            <Home />
+        </PokemonProvider>
+    );
+}
+
+const Home = () => {
+    const [searchInput, setSearchInput] = useState('');
+    const { pokemonList, searchInPokemonList } = usePokemonContext();
+
+    const onSearchPokemonChange = (e) => {
+      setSearchInput(e.target.value);
+    };
+
+    useEffect(() => {
+        searchInPokemonList(searchInput);
+    }, [searchInput]);
+
+    return (
+        <div className={styles.App}>
+            <input onInput={onSearchPokemonChange}/>
+            <PokemonSection data={pokemonList}/>
+            <PokemonPreview />
+        </div>
+    );
 }
 
 export default App;
