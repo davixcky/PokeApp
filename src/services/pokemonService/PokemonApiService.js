@@ -1,4 +1,5 @@
 import axios from "axios";
+import {getPokemonParsedInfo} from "../../utils/pokemonInfo";
 
 class PokemonApiService {
     constructor() {
@@ -17,8 +18,7 @@ class PokemonApiService {
 
     async getPokemonByID(id) {
         const {data} = await this.client.get(`https://pokeapi.co/api/v2/pokemon/${id}/`);
-        console.log(data);
-        return data;
+        return getPokemonParsedInfo(data);
     }
 }
 

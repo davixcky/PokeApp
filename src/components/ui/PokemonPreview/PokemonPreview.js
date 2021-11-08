@@ -4,7 +4,7 @@ import styles from "./PokemonPreview.module.css";
 import {Card} from "../Card";
 import {usePokemonContext} from "../../../context/pokemonContext";
 
-const PokemonPreview = () => {
+const PokemonPreview = ({onShowDetails}) => {
     const {currentPokemon, capturedPokemon, onCaptureCurrentPokemon} = usePokemonContext();
 
     useEffect(() => {
@@ -23,24 +23,18 @@ const PokemonPreview = () => {
         )
     }
 
-    const getImageUrl = () => {
-        return currentPokemon.sprites.other.dream_world.front_default || 'https://cdn.vectorstock.com/i/1000x1000/74/05/pokemon-go-logo-icon-vector-23237405.jpg';
-    };
-
-    const onShowDetails = () => {
-        console.log('show pokemon details');
-    };
-
     return (
         <Card>
-            <h2>{currentPokemon.forms[0].name || 'name not found'}</h2>
-            <img src={getImageUrl()} alt={currentPokemon.forms[0].name || 'name not found'}/>
+            <h2>{currentPokemon.name}</h2>
+            <img src={currentPokemon.mainImage} alt={currentPokemon.name}/>
             <button onClick={onCaptureCurrentPokemon}>catch</button>
             <button onClick={onShowDetails}>details</button>
         </Card>
     );
 };
 
-PokemonPreview.propTypes = {};
+PokemonPreview.propTypes = {
+    onShowDetails: PropTypes.func,
+};
 
 export default PokemonPreview;
