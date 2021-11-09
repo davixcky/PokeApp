@@ -28,10 +28,20 @@ const Home = () => {
 
     return (
         <div className={styles.container}>
-            <input onInput={onSearchPokemonChange}/>
-            <PokemonSection data={pokemonList}/>
-            <PokemonPreview onShowDetails={onShowDetails}/>
-            { showModal && <PokemonDetails onClose={onCloseDetails}/>}
+            <div className={styles.mainBar}>
+                <div className={styles.searchBar}>
+                    <input onInput={onSearchPokemonChange} className={styles.inputBar}/>
+                    <button><img src="/images/Search.png" alt="my image" className={styles.searchIcon}/></button>
+                </div>
+                <div className={styles.mainBar__favorites}>
+                    <button><img src="/images/Home.png" alt="my image"/></button>
+                </div>
+            </div>
+            <div className={styles.pokemonContainer}>
+                <PokemonSection data={pokemonList}/>
+                <PokemonPreview onShowDetails={onShowDetails}/>
+                { showModal && <PokemonDetails onClose={onCloseDetails}/>}
+            </div>
         </div>
     );
 }
