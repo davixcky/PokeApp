@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styles from "./PokemonPreview.module.css";
 import {Card} from "../Card";
 import {usePokemonContext} from "../../../context/pokemonContext";
+import {Button} from "../Button";
 
 const PokemonPreview = ({onShowDetails}) => {
     const {currentPokemon, capturedPokemon, onCaptureCurrentPokemon} = usePokemonContext();
@@ -25,10 +26,19 @@ const PokemonPreview = ({onShowDetails}) => {
 
     return (
         <Card>
-            <h2>{currentPokemon.name}</h2>
-            <img src={currentPokemon.mainImage} alt={currentPokemon.name}/>
-            <button onClick={onCaptureCurrentPokemon}>catch</button>
-            <button onClick={onShowDetails}>details</button>
+            <div className={styles.header}>
+                <h2>{currentPokemon.name}</h2>
+            </div>
+            <div className={styles.content}>
+                <img src={currentPokemon.mainImage} alt={currentPokemon.name}/>
+                <div className={styles.buttons}>
+                    <Button src='/images/Catch.png' alt={currentPokemon.name}
+                            onClick={onCaptureCurrentPokemon} text='Catch'/>
+                    <Button src='/images/Details.png' alt={currentPokemon.name}
+                            onClick={onShowDetails} text='Details'/>
+
+                </div>
+            </div>
         </Card>
     );
 };

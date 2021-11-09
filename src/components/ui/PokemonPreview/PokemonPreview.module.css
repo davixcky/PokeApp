@@ -8,3 +8,44 @@
   padding: 0;
   list-style-type: none;
 }
+
+.header,
+.content{
+  display: flex;
+  margin-bottom: 50px;
+  padding: 0px 20px;
+  flex-direction: row;
+}
+
+/* header */
+.header h2:first-letter {
+  text-transform: uppercase;
+}
+
+.header {
+  justify-content: center;
+  border-radius: 20px;
+  background-color: #00FFB0;
+}
+
+/* content */
+.content {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.content > img{
+  width: 400px;
+  height: 400px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttons > button {
+  justify-content: flex-end;
+  height: 40px;
+  width: 40px;
+}
