@@ -1,6 +1,7 @@
 import {createContext, useContext, useEffect, useState} from 'react';
 import pokemonApi from '../../services/pokemonService';
 import PropTypes from 'prop-types';
+import {launchToast} from "../../utils/toast";
 
 const PokemonContext = createContext();
 
@@ -46,13 +47,13 @@ const PokemonProvider = ({children}) => {
 
             const exists = prev.some(({name: pokemonName}) => pokemonName === name);
             if (exists) {
-                alert(`pokemon ${name} was already catch`);
+                launchToast('⚡ Pokemon was already captured');
                 return prev;
             }
 
             const url = `https://pokeapi.co/api/v2/pokemon/${id}/`;
 
-            alert(`pokemon ${name} captured`);
+            launchToast('⚡ Pokemon captured. Oh yey!');
             return [...prev, { name, url }];
         });
     };
@@ -63,6 +64,7 @@ const PokemonProvider = ({children}) => {
 
             const filteredPokemon = prev.filter(({name: pokemonName}) => pokemonName !== name);
 
+            launchToast('⚡ Pokemon released. Oh yey!');
             return [...filteredPokemon];
         });
     };

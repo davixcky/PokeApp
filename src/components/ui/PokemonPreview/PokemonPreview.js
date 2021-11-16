@@ -3,10 +3,9 @@ import PropTypes from "prop-types";
 import styles from "./PokemonPreview.module.css";
 import {Card} from "../Card";
 import {usePokemonContext} from "../../../context/pokemonContext";
-import {Button} from "../Button";
 
-const PokemonPreview = ({onShowDetails, children}) => {
-    const {currentPokemon, onCaptureCurrentPokemon} = usePokemonContext();
+const PokemonPreview = ({children}) => {
+    const {currentPokemon} = usePokemonContext();
 
     if (!currentPokemon) {
         return (
@@ -32,7 +31,6 @@ const PokemonPreview = ({onShowDetails, children}) => {
 };
 
 PokemonPreview.propTypes = {
-    onShowDetails: PropTypes.func,
     children: PropTypes.node.isRequired,
 };
 

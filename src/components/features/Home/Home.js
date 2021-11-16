@@ -9,7 +9,7 @@ import {Button} from "../../ui/Button";
 
 const Home = () => {
     const [searchInput, setSearchInput] = useState('');
-    const {pokemonList, searchInPokemonList, currentPokemon, onCaptureCurrentPokemon} = usePokemonContext();
+    const {pokemonList, searchInPokemonList, onCaptureCurrentPokemon} = usePokemonContext();
     const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
 
