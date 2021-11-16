@@ -5,7 +5,7 @@ import {Card} from "../Card";
 import {usePokemonContext} from "../../../context/pokemonContext";
 import {Button} from "../Button";
 
-const PokemonPreview = ({onShowDetails}) => {
+const PokemonPreview = ({onShowDetails, children}) => {
     const {currentPokemon, onCaptureCurrentPokemon} = usePokemonContext();
 
     if (!currentPokemon) {
@@ -24,11 +24,7 @@ const PokemonPreview = ({onShowDetails}) => {
             <div className={styles.content}>
                 <img src={currentPokemon.mainImage} alt={currentPokemon.name}/>
                 <div className={styles.buttons}>
-                    <Button src='/images/Catch.png' alt={currentPokemon.name}
-                            onClick={onCaptureCurrentPokemon} text='Catch'/>
-                    <Button src='/images/Details.png' alt={currentPokemon.name}
-                            onClick={onShowDetails} text='Details'/>
-
+                    {children}
                 </div>
             </div>
         </Card>
@@ -37,6 +33,7 @@ const PokemonPreview = ({onShowDetails}) => {
 
 PokemonPreview.propTypes = {
     onShowDetails: PropTypes.func,
+    children: PropTypes.node.isRequired,
 };
 
 export default PokemonPreview;

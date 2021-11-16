@@ -5,10 +5,17 @@ import {PokemonSection} from "../../ui";
 import {PokemonPreview} from "../../ui/PokemonPreview";
 import {PokemonDetails} from "../../ui/PokemonDetails";
 import {useNavigate} from "react-router-dom";
+import {Button} from "../../ui/Button";
 
 const Favorites = () => {
     const [searchInput, setSearchInput] = useState('');
-    const {searchInPokemonList, capturedPokemon } = usePokemonContext();
+    const {
+        searchInPokemonList,
+        capturedPokemon,
+        onReleaseCurrentPokemon,
+        isCurrentCatch,
+        onCaptureCurrentPokemon
+    } = usePokemonContext();
     const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
 
@@ -45,8 +52,15 @@ const Favorites = () => {
             </div>
             <div className={styles.pokemonContainer}>
                 <PokemonSection data={capturedPokemon}/>
-                <PokemonPreview onShowDetails={onShowDetails}/>
-                { showModal && <PokemonDetails onClose={onCloseDetails}/>}
+                <PokemonPreview onShowDetails={onShowDetails}>
+                    {isCurrentCatch() && <Button src='/images/Release.png' alt='pokemon release'
+                                                 onClick={onReleaseCurrentPokemon} text='Release'/>}
+                    {!isCurrentCatch() && <Button src='/images/Catch.png' alt='pokemon catch'
+                                                  onClick={onCaptureCurrentPokemon} text='Catch'/>}
+                    <Button src='/images/Details.png' alt='pokemon details'
+                            onClick={onShowDetails} text='Details'/>
+                </PokemonPreview>
+                {showModal && <PokemonDetails onClose={onCloseDetails}/>}
             </div>
         </div>
     );

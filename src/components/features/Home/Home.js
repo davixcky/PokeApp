@@ -5,10 +5,11 @@ import {PokemonSection} from "../../ui";
 import {PokemonPreview} from "../../ui/PokemonPreview";
 import {PokemonDetails} from "../../ui/PokemonDetails";
 import {useNavigate} from "react-router-dom";
+import {Button} from "../../ui/Button";
 
 const Home = () => {
     const [searchInput, setSearchInput] = useState('');
-    const {pokemonList, searchInPokemonList} = usePokemonContext();
+    const {pokemonList, searchInPokemonList, currentPokemon, onCaptureCurrentPokemon} = usePokemonContext();
     const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
 
@@ -45,8 +46,13 @@ const Home = () => {
             </div>
             <div className={styles.pokemonContainer}>
                 <PokemonSection data={pokemonList}/>
-                <PokemonPreview onShowDetails={onShowDetails}/>
-                { showModal && <PokemonDetails onClose={onCloseDetails}/>}
+                <PokemonPreview onShowDetails={onShowDetails}>
+                    <Button src='/images/Catch.png' alt='pokemon catch'
+                            onClick={onCaptureCurrentPokemon} text='Catch'/>
+                    <Button src='/images/Details.png' alt='pokemon details'
+                            onClick={onShowDetails} text='Details'/>
+                </PokemonPreview>
+                {showModal && <PokemonDetails onClose={onCloseDetails}/>}
             </div>
         </div>
     );

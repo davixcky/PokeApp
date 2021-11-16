@@ -42,12 +42,33 @@ const PokemonProvider = ({children}) => {
 
     const onCaptureCurrentPokemon = () => {
         setCapturedPokemon(prev => {
-            if (prev.includes(currentPokemon)) return prev;
-
             const { name, id } = currentPokemon;
+
+            const exists = prev.some(({name: pokemonName}) => pokemonName === name);
+            if (exists) {
+                alert(`pokemon ${name} was already catch`);
+                return prev;
+            }
+
             const url = `https://pokeapi.co/api/v2/pokemon/${id}/`;
+
+            alert(`pokemon ${name} captured`);
             return [...prev, { name, url }];
         });
+    };
+
+    const onReleaseCurrentPokemon = () => {
+        setCapturedPokemon(prev => {
+            const { name } = currentPokemon;
+
+            const filteredPokemon = prev.filter(({name: pokemonName}) => pokemonName !== name);
+
+            return [...filteredPokemon];
+        });
+    };
+
+    const isCurrentCatch = () => {
+        return capturedPokemon.some(({name}) => name === currentPokemon.name);
     };
 
     return (
@@ -58,6 +79,8 @@ const PokemonProvider = ({children}) => {
             searchInPokemonList,
             setCurrentPokemonID,
             onCaptureCurrentPokemon,
+            onReleaseCurrentPokemon,
+            isCurrentCatch,
         }}>
             {children}
         </PokemonContext.Provider>
