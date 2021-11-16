@@ -7,7 +7,7 @@ export const getPokemonIDFromURL = (url) => {
 export const DEFAULT_NAME = 'unknown pokemon';
 export const DEFAULT_IMAGE = 'https://cdn.vectorstock.com/i/1000x1000/74/05/pokemon-go-logo-icon-vector-23237405.jpg';
 
-export const getPokemonParsedInfo = (pokemon) => {
+export const getPokemonParsedInfo = (pokemon, id) => {
     const name = pokemon.forms[0].name || DEFAULT_NAME;
     const mainImage = pokemon.sprites.other.dream_world.front_default || DEFAULT_IMAGE;
 
@@ -29,5 +29,6 @@ export const getPokemonParsedInfo = (pokemon) => {
         types,
         abilities,
         hiddenAbilities,
+        id,
     }
 };

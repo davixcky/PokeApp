@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from "react";
 import {usePokemonContext} from "../../../context/pokemonContext";
-import styles from './Home.module.css';
+import styles from './Favorites.module.css';
 import {PokemonSection} from "../../ui";
 import {PokemonPreview} from "../../ui/PokemonPreview";
 import {PokemonDetails} from "../../ui/PokemonDetails";
 import {useNavigate} from "react-router-dom";
 
-const Home = () => {
+const Favorites = () => {
     const [searchInput, setSearchInput] = useState('');
-    const {pokemonList, searchInPokemonList} = usePokemonContext();
+    const {searchInPokemonList, capturedPokemon } = usePokemonContext();
     const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
 
@@ -24,8 +24,8 @@ const Home = () => {
         setShowModal(false);
     };
 
-    const onGoToFavorites = () => {
-        navigate('/captures');
+    const onGoToHome = () => {
+        navigate('/');
     };
 
     useEffect(() => {
@@ -37,14 +37,14 @@ const Home = () => {
             <div className={styles.mainBar}>
                 <div className={styles.searchBar}>
                     <input onInput={onSearchPokemonChange} className={styles.inputBar}/>
-                    <button><img src="/images/Search.png" alt="Search" className={styles.searchIcon}/></button>
+                    <button><img src="/images/Search.png" alt="search" className={styles.searchIcon}/></button>
                 </div>
                 <div className={styles.mainBar__favorites}>
-                    <button onClick={onGoToFavorites}><img src="/images/Home.png" alt="Favorites"/></button>
+                    <button onClick={onGoToHome}><img src="/images/Home.png" alt="home"/></button>
                 </div>
             </div>
             <div className={styles.pokemonContainer}>
-                <PokemonSection data={pokemonList}/>
+                <PokemonSection data={capturedPokemon}/>
                 <PokemonPreview onShowDetails={onShowDetails}/>
                 { showModal && <PokemonDetails onClose={onCloseDetails}/>}
             </div>
@@ -52,4 +52,4 @@ const Home = () => {
     );
 }
 
-export default Home;
+export default Favorites;

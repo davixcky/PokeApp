@@ -44,7 +44,9 @@ const PokemonProvider = ({children}) => {
         setCapturedPokemon(prev => {
             if (prev.includes(currentPokemon)) return prev;
 
-            return [...prev, currentPokemon];
+            const { name, id } = currentPokemon;
+            const url = `https://pokeapi.co/api/v2/pokemon/${id}/`;
+            return [...prev, { name, url }];
         });
     };
 

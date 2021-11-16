@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import styles from "./PokemonPreview.module.css";
 import {Card} from "../Card";
@@ -6,15 +6,7 @@ import {usePokemonContext} from "../../../context/pokemonContext";
 import {Button} from "../Button";
 
 const PokemonPreview = ({onShowDetails}) => {
-    const {currentPokemon, capturedPokemon, onCaptureCurrentPokemon} = usePokemonContext();
-
-    useEffect(() => {
-        console.log(currentPokemon);
-    }, [currentPokemon]);
-
-    useEffect(() => {
-        console.log(capturedPokemon);
-    }, [capturedPokemon]);
+    const {currentPokemon, onCaptureCurrentPokemon} = usePokemonContext();
 
     if (!currentPokemon) {
         return (

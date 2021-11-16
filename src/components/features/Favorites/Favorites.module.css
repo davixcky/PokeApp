@@ -1,0 +1,56 @@
+.container {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.mainBar,
+.searchBar,
+.mainBar__favorites,
+.pokemonContainer {
+    display: flex;
+    flex-direction: row;
+    padding: 0 20px;
+    margin: 30px;
+}
+
+.searchBar {
+    background-color: white;
+    border-radius: 20px;
+    border: none;
+    flex-grow: 2;
+}
+
+.mainBar *,
+.mainBar *:focus{
+    border: none;
+    outline: none;
+}
+
+.inputBar {
+    padding: 14px;
+    flex-grow: 2;
+    font-size: 1.2em;
+    margin-right: 8px;
+}
+
+.mainBar button {
+    background-color: transparent;
+}
+
+.searchBar img:hover {
+    background-color: rgb(192,192,192);
+}
+
+.mainBar__favorites {
+    border-radius: 40px;
+    background-color: white;
+    padding: 0;
+}
+
+.pokemonContainer {
+    margin-top: 0;
+}

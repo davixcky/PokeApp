@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import styles from './PokemonDetails.module.css';
 import PropTypes from "prop-types";
 import {Modal} from "../Modal";
@@ -7,10 +7,6 @@ import {usePokemonContext} from "../../../context/pokemonContext";
 const PokemonDetails = ({onClose}) => {
 
     const {currentPokemon, onCaptureCurrentPokemon} = usePokemonContext();
-
-    useEffect(() => {
-        console.log({currentPokemon});
-    }, []);
 
     return (
         <Modal onClose={onClose}>

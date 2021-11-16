@@ -18,7 +18,7 @@ class PokemonApiService {
 
     async getPokemonByID(id) {
         const {data} = await this.client.get(`https://pokeapi.co/api/v2/pokemon/${id}/`);
-        return getPokemonParsedInfo(data);
+        return getPokemonParsedInfo(data, id);
     }
 }
 
